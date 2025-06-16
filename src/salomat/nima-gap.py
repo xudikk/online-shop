@@ -1,0 +1,2 @@
+# qachon choyhona
+# dachaga chiqmimizami
