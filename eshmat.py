@@ -1,2 +1,2 @@
-print("salom eshmatjon")
-
+# qachon choyhona
+# dachaga chiqmimizami
