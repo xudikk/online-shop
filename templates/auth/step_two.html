@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takoy Do‘kon - Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .form-container {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffeb3b;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .otp-input {
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            font-size: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid #ffeb3b;
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .otp-input:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-white font-sans">
+    <div class="form-container w-full max-w-md p-8">
+        <h2 class="text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Verification</h2>
+        <h3 class="text-2xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">SMS Kodni kiriting({{ request.session.otp }})</h3>
+        <h4 class="text-1xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500"><span id="countdown">180</span></h4>
+        <h4 style="color:red;" class="text-center">{{ error }}</h4>
+        <form class="space-y-6" id="otp-form" method="post">
+            {% csrf_token %}
+            <div class="flex justify-between gap-2">
+                <input name="otp1" type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 1)" autofocus>
+                <input name="otp2" type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 2)">
+                <input name="otp3" type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 3)">
+                <input name="otp4" type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 4)">
+                <input name="otp5" type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 5)">
+                <input name="otp6" type="text" maxlength="1" class="otp-input" oninput="moveToNext(this, 6)">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600">Verify OTP</button>
+            <p class="text-center">Already have an account? <a href="login.html" class="text-yellow-300 hover:underline">Login here</a></p>
+        </form>
+    </div>
+    <script>
+        function moveToNext(current, nextFieldIndex) {
+            const inputs = document.querySelectorAll('.otp-input');
+            if (current.value.length === 1 && nextFieldIndex < inputs.length) {
+                inputs[nextFieldIndex].focus();
+            }
+            if (current.value.length === 0 && nextFieldIndex > 1) {
+                inputs[nextFieldIndex - 2].focus();
+            }
+        }
+
+
+        document.querySelectorAll('.otp-input').forEach(input => {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && input.value === '') {
+                    const index = Array.from(input.parentElement.children).indexOf(input);
+                    if (index > 0) {
+                        input.parentElement.children[index - 1].focus();
+                    }
+                }
+            });
+            input.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+                if (paste.length <= 6) {
+                    const inputs = document.querySelectorAll('.otp-input');
+                    for (let i = 0; i < paste.length; i++) {
+                        inputs[i].value = paste[i];
+                        if (i < 5) inputs[i + 1].focus();
+                    }
+                }
+            });
+        });
+
+        let timeLeft = 180;
+        const countdownElement = document.getElementById('countdown'); // ID'dan # belgisiz foydalanamiz
+
+        if (countdownElement) { // Element mavjudligini tekshiramiz
+            const countdown = setInterval(() => {
+                timeLeft--;
+                countdownElement.innerHTML = timeLeft; // innerHTML to'g'ri yozildi
+
+            }, 1000);
+            }
+
+    </script>
+</body>
+</html>

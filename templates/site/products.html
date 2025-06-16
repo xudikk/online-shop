@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takoy Do‘kon - Products</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #ff3e3e, #ffeb3b, #00ff9d, #3b82f6);
+            background-size: 500% 500%;
+            animation: gradientShift 10s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px #ffeb3b;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: #ffeb3b;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ffeb3b;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex flex-col text-white font-sans">
+    <nav class="p-6 flex justify-between items-center border-b-4 border-yellow-300 border-opacity-50">
+        <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Takoy Do‘kon</h1>
+        <ul class="flex space-x-6">
+            <li><a href="index.html" class="nav-link hover:text-yellow-300">Home</a></li>
+            <li><a href="categories.html" class="nav-link hover:text-yellow-300">Categories</a></li>
+            <li><a href="products.html" class="nav-link hover:text-yellow-300">Products</a></li>
+            <li><a href="product-detail.html" class="nav-link hover:text-yellow-300">Product Detail</a></li>
+            <li><a href="search.html" class="nav-link hover:text-yellow-300">Search</a></li>
+            <li><a href="cart.html" class="nav-link hover:text-yellow-300">Cart</a></li>
+            <li><a href="checkout.html" class="nav-link hover:text-yellow-300">Checkout</a></li>
+            <li><a href="account.html" class="nav-link hover:text-yellow-300">Account</a></li>
+            <li><a href="login.html" class="nav-link hover:text-yellow-300">Login</a></li>
+            <li><a href="register.html" class="nav-link hover:text-yellow-300">Register</a></li>
+        </ul>
+    </nav>
+    <div class="flex-1 flex flex-col items-center justify-start p-8">
+        <h2 class="text-5xl font-extrabold mb-10 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Products</h2>
+        <div id="productList" class="grid grid-cols-1 md:grid-cols-5 gap-6 w-full max-w-7xl">
+            <!-- Birinchi 20 ta mahsulot -->
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center relative">
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>
+                <img src="https://images.unsplash.com/photo-1611186871348-8d3b5620ca92?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Smartphone" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Samsung</p>
+                <p class="text-xl font-bold text-yellow-300">Samsung Smartphone</p>
+                <p class="text-sm text-gray-400">$299.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Laptop" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Dell</p>
+                <p class="text-xl font-bold text-yellow-300">Dell Laptop</p>
+                <p class="text-sm text-gray-400">$799.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center relative">
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>
+                <img src="https://images.unsplash.com/photo-1593642634315-48f5414c0558?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Smart Watch" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Apple</p>
+                <p class="text-xl font-bold text-yellow-300">Apple Smart Watch</p>
+                <p class="text-sm text-gray-400">$149.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Headphones" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Sony</p>
+                <p class="text-xl font-bold text-yellow-300">Sony Headphones</p>
+                <p class="text-sm text-gray-400">$89.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center relative">
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Fridge" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: LG</p>
+                <p class="text-xl font-bold text-yellow-300">LG Fridge</p>
+                <p class="text-sm text-gray-400">$499.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Washing Machine" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Samsung</p>
+                <p class="text-xl font-bold text-yellow-300">Samsung Washing Machine</p>
+                <p class="text-sm text-gray-400">$399.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="TV" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Sony</p>
+                <p class="text-xl font-bold text-yellow-300">Sony TV</p>
+                <p class="text-sm text-gray-400">$599.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Dumbbell Set" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Adidas</p>
+                <p class="text-xl font-bold text-yellow-300">Adidas Dumbbell Set</p>
+                <p class="text-sm text-gray-400">$99.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Car Vacuum" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Bosch</p>
+                <p class="text-xl font-bold text-yellow-300">Bosch Car Vacuum</p>
+                <p class="text-sm text-gray-400">$49.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Kids Scooter" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Xiaomi</p>
+                <p class="text-xl font-bold text-yellow-300">Xiaomi Kids Scooter</p>
+                <p class="text-sm text-gray-400">$39.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Jacket" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Zara</p>
+                <p class="text-xl font-bold text-yellow-300">Zara Jacket</p>
+                <p class="text-sm text-gray-400">$79.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Blender" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Philips</p>
+                <p class="text-xl font-bold text-yellow-300">Philips Blender</p>
+                <p class="text-sm text-gray-400">$59.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Gaming Console" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Sony</p>
+                <p class="text-xl font-bold text-yellow-300">Sony Gaming Console</p>
+                <p class="text-sm text-gray-400">$399.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center relative">
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Air Fryer" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Tefal</p>
+                <p class="text-xl font-bold text-yellow-300">Tefal Air Fryer</p>
+                <p class="text-sm text-gray-400">$129.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Yoga Mat" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Nike</p>
+                <p class="text-xl font-bold text-yellow-300">Nike Yoga Mat</p>
+                <p class="text-sm text-gray-400">$29.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Car Seat Cover" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Toyota</p>
+                <p class="text-xl font-bold text-yellow-300">Toyota Car Seat Cover</p>
+                <p class="text-sm text-gray-400">$69.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Baby Stroller" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Chicco</p>
+                <p class="text-xl font-bold text-yellow-300">Chicco Baby Stroller</p>
+                <p class="text-sm text-gray-400">$199.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Sneakers" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Adidas</p>
+                <p class="text-xl font-bold text-yellow-300">Adidas Sneakers</p>
+                <p class="text-sm text-gray-400">$99.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Microwave" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Panasonic</p>
+                <p class="text-xl font-bold text-yellow-300">Panasonic Microwave</p>
+                <p class="text-sm text-gray-400">$89.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3" alt="Camera" class="w-32 h-32 object-cover rounded-lg mb-4">
+                <p class="text-sm text-gray-400">Brand: Canon</p>
+                <p class="text-xl font-bold text-yellow-300">Canon Camera</p>
+                <p class="text-sm text-gray-400">$499.99</p>
+                <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+            </div>
+        </div>
+        <button id="loadMore" class="mt-10 bg-yellow-400 text-black p-4 rounded-lg hover:bg-yellow-500">Yana ko‘rsatish</button>
+    </div>
+    <footer class="p-6 bg-gray-900 bg-opacity-80 text-center">
+        <p>© 2025 Takoy Do‘kon. All rights reserved.</p>
+    </footer>
+    <script>
+        const products = [
+            { name: "Apple Tablet", price: "$399.99", brand: "Apple", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "Amazon Smart Speaker", price: "$79.99", brand: "Amazon", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Philips Electric Kettle", price: "$39.99", brand: "Philips", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "Reebok Treadmill", price: "$599.99", brand: "Reebok", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Anker Car Charger", price: "$29.99", brand: "Anker", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Decathlon Kids Bike", price: "$89.99", brand: "Decathlon", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "H&M Backpack", price: "$49.99", brand: "H&M", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Nespresso Coffee Maker", price: "$149.99", brand: "Nespresso", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "LG Monitor", price: "$249.99", brand: "LG", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "Bosch Toaster", price: "$39.99", brand: "Bosch", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Nike Sports Bottle", price: "$19.99", brand: "Nike", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Garmin Car Dash Cam", price: "$99.99", brand: "Garmin", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "Philips Baby Monitor", price: "$129.99", brand: "Philips", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Ray-Ban Sunglasses", price: "$149.99", brand: "Ray-Ban", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Dyson Vacuum Cleaner", price: "$299.99", brand: "Dyson", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "HP Printer", price: "$199.99", brand: "HP", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Logitech Mouse", price: "$29.99", brand: "Logitech", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "Razer Keyboard", price: "$99.99", brand: "Razer", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: true },
+            { name: "JBL Earphones", price: "$49.99", brand: "JBL", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false },
+            { name: "TP-Link Router", price: "$69.99", brand: "TP-Link", image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3", sale: false }
+        ];
+
+        let currentIndex = 0;
+        const productList = document.getElementById('productList');
+        const loadMoreBtn = document.getElementById('loadMore');
+
+        function loadProducts() {
+            const nextProducts = products.slice(currentIndex, currentIndex + 20);
+            nextProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex flex-col items-center relative';
+                productDiv.innerHTML = `
+                    ${product.sale ? '<div class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>' : ''}
+                    <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-lg mb-4">
+                    <p class="text-sm text-gray-400">Brand: ${product.brand}</p>
+                    <p class="text-xl font-bold text-yellow-300">${product.name}</p>
+                    <p class="text-sm text-gray-400">${product.price}</p>
+                    <button class="mt-2 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Add to Cart</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+            currentIndex += 20;
+            if (currentIndex >= products.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+        loadMoreBtn.addEventListener('click', loadProducts);
+
+        document.querySelectorAll('.card button').forEach(button => {
+            button.addEventListener('click', () => alert('Added to cart!'));
+        });
+    </script>
+</body>
+</html>

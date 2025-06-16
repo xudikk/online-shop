@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takoy Do‘kon - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .form-container {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffeb3b;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-white font-sans">
+    <div class="form-container w-full max-w-md p-8">
+        <h2 class="text-4xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Login</h2>
+        <h3 class="font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-red-500">{{ error }}</h3>
+        <form class="space-y-6" method="post">
+            {% csrf_token %}
+            <div>
+                <label class="block text-sm font-medium mb-2">Phone</label>
+                <input type="text" placeholder="Phone" name="phone"  class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+            <div>
+                <label class="block text-sm font-medium mb-2">Password</label>
+                <input type="password" name="password"  placeholder="********" class="w-full p-3 rounded-lg bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-yellow-400">
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white p-4 rounded-lg hover:bg-blue-600">Login</button>
+            <p class="text-center">Don't have an account? <a href="register.html" class="text-yellow-300 hover:underline">Register here</a></p>
+        </form>
+    </div>
+</body>
+</html>

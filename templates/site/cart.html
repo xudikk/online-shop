@@ -1,0 +1,154 @@
+{% extends 'site/base.html' %}
+
+{% block title %}Home{% endblock %}
+{% block style %}
+<style>
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px #ffeb3b;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: #ffeb3b;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ffeb3b;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="flex-1 flex flex-col items-center justify-start p-8">
+        <h2 class="text-5xl font-extrabold mb-10 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Your Cart</h2>
+
+        <div class="w-full max-w-5xl space-y-6">
+        {% for i in carts %}
+            <div class="card bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex items-center space-x-6">
+                <img src="{{ i.product.img.url }}" alt="{{ i.product.name }}" class="w-24 h-24 object-cover rounded-lg">
+                <div class="flex-1">
+                    <p class="text-sm text-gray-400">Brand: {{ i.product.brand.name }}</p>
+                    <p class="text-xl font-bold text-yellow-300">{{ i.product.name }}</p>
+                    <p class="text-sm text-gray-400" data-price="{{ i.product.get_price }}">{{ i.product.get_price_with_icon }}</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 decrease"
+                    onclick="decrease('card_{{ i.id }}', {{ i.id }})"
+                    >-</button>
+                    <span class="text-lg quantity" id="card_{{ i.id }}">{{ i.quantity }}</span>
+                    <button class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 increase"
+                            onclick="increase('card_{{ i.id }}', {{ i.id }})">+
+                    </button>
+                </div>
+                <button class="bg-red-600 text-white p-2 rounded-lg hover:bg-red-700 remove">Remove</button>
+            </div>
+        {% endfor %}
+
+        </div>
+
+
+        <div class="w-full max-w-5xl mt-10 bg-gray-800 bg-opacity-70 p-6 rounded-xl shadow-xl flex justify-between items-center">
+            <p class="text-2xl font-bold text-yellow-300" id="total">Total: $<span id="total_balance">{{ request.user.calculate_cart }}</span></p>
+            <a href="checkout.html" class="bg-green-500 text-white p-4 rounded-lg hover:bg-green-600">Checkout</a>
+        </div>
+    </div>
+
+
+    <script>
+
+        function increase(span_id, id=0){
+            quent = document.getElementById(span_id).innerText
+            console.log(quent)
+
+            const url = `/ch/cart/${id}/1/`;
+            fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error('So\'rov muvaffaqiyatsiz: ' + response.status);
+                }
+
+                return response.json(); // JSON formatida ma'lumot olish
+              })
+              .then(data => {
+                console.log(data); // Ma'lumotlarni konsolga chiqarish
+                if (data.success){
+                    quent ++
+                    span = document.getElementById(span_id).innerHTML = quent
+                    document.getElementById('total_balance').innerHTML = data.total_balance
+                };
+
+              })
+              .catch(error => {
+                console.error('Xato:', error);
+          });
+
+        }
+
+        function decrease(span_id, id=0) {
+              const spanElement = document.getElementById(span_id);
+              const totalBalanceElement = document.getElementById('total_balance');
+
+              let quantity = parseInt(spanElement.innerText);
+
+              if (quantity <= 0) {
+                alert('Vse!!!');
+                return;
+              }
+
+              const url = `/ch/cart/${id}/0/`;
+
+              fetch(url)
+                .then(response => {
+                  if (!response.ok) {
+                    throw new Error(`So'rov muvaffaqiyatsiz: ${response.status}`);
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  console.log(data);
+                  if (data.success) {
+                    quantity--;
+                    spanElement.innerHTML = quantity;
+                    totalBalanceElement.innerHTML = data.total_balance;
+                  }
+                })
+                .catch(error => {
+                  console.error('Xato:', error);
+                  alert('Xatolik yuz berdi: ' + error.message);
+                });
+            }
+
+
+
+    </script>
+
+
+{% endblock %}

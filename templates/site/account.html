@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takoy Do‘kon - Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e3c72, #2a5298, #ff5e62);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background-image: url('https://images.unsplash.com/photo-1501854143802-7447f0989e5b?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, #ff5e62, #ffeb3b);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .balance-icon {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s;
+        }
+        .balance-card:hover .balance-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+        .order-table th, .order-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .order-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex flex-col text-white font-sans">
+    <nav class="p-6 flex justify-between items-center border-b-4 border-opacity-50 border-yellow-300">
+        <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">Takoy Do‘kon</h1>
+        <ul class="flex space-x-6">
+            <li><a href="index.html" class="nav-link hover:text-yellow-300">Home</a></li>
+            <li><a href="categories.html" class="nav-link hover:text-yellow-300">Categories</a></li>
+            <li><a href="products.html" class="nav-link hover:text-yellow-300">Products</a></li>
+            <li><a href="product-detail.html" class="nav-link hover:text-yellow-300">Product Detail</a></li>
+            <li><a href="search.html" class="nav-link hover:text-yellow-300">Search</a></li>
+            <li><a href="cart.html" class="nav-link hover:text-yellow-300">Cart</a></li>
+            <li><a href="checkout.html" class="nav-link hover:text-yellow-300">Checkout</a></li>
+            <li><a href="account.html" class="nav-link hover:text-yellow-300">Account</a></li>
+            <li><a href="login.html" class="nav-link hover:text-yellow-300">Login</a></li>
+            <li><a href="register.html" class="nav-link hover:text-yellow-300">Register</a></li>
+        </ul>
+    </nav>
+    <div class="flex-1 flex flex-col items-center justify-start p-8">
+        <h2 class="text-5xl font-extrabold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-500">My Account</h2>
+        <div class="w-full max-w-6xl space-y-12">
+            <!-- Profile Information -->
+            <div class="glass-card p-8">
+                <h3 class="text-3xl font-bold text-yellow-300 mb-6 border-b-2 border-yellow-300 pb-2">Profile Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <p class="text-lg text-gray-200 mb-3"><strong>Username:</strong> takoyUser</p>
+                        <p class="text-lg text-gray-200 mb-3"><strong>Email:</strong> takoy.user@example.com</p>
+                        <p class="text-lg text-gray-200"><strong>Phone:</strong> +998 90 123 4567</p>
+                    </div>
+                    <div>
+                        <p class="text-lg text-gray-200 mb-3"><strong>Address:</strong> Tashkent, Uzbekistan</p>
+                        <p class="text-lg text-gray-200 mb-6"><strong>Joined:</strong> January 2025</p>
+                        <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Balance -->
+            <div class="glass-card p-8 flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Balance Icon" class="balance-icon">
+                    <div>
+                        <h3 class="text-2xl font-bold text-yellow-300 mb-2">Your Balance</h3>
+                        <p class="text-4xl font-extrabold text-green-400">$150.00</p>
+                    </div>
+                </div>
+                <a href="#" class="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition duration-300">Add Funds</a>
+            </div>
+
+            <!-- Order History -->
+            <div class="glass-card p-8">
+                <h3 class="text-3xl font-bold text-yellow-300 mb-6 border-b-2 border-yellow-300 pb-2">Order History</h3>
+                <div class="overflow-x-auto">
+                    <table class="order-table w-full text-left">
+                        <thead>
+                            <tr class="text-gray-200">
+                                <th class="p-4 text-lg font-semibold">Order ID</th>
+                                <th class="p-4 text-lg font-semibold">Date</th>
+                                <th class="p-4 text-lg font-semibold">Items</th>
+                                <th class="p-4 text-lg font-semibold">Total</th>
+                                <th class="p-4 text-lg font-semibold">Status</th>
+                                <th class="p-4 text-lg font-semibold">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4 text-gray-300">#123</td>
+                                <td class="p-4 text-gray-300">2025-05-01</td>
+                                <td class="p-4 text-gray-300">Smartphone, Headphones</td>
+                                <td class="p-4 text-gray-300">$389.98</td>
+                                <td class="p-4 text-green-400 font-medium">Delivered</td>
+                                <td class="p-4"><a href="#" class="text-blue-400 hover:underline font-medium">View Details</a></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-gray-300">#124</td>
+                                <td class="p-4 text-gray-300">2025-05-10</td>
+                                <td class="p-4 text-gray-300">Laptop, Smart Watch</td>
+                                <td class="p-4 text-gray-300">$949.98</td>
+                                <td class="p-4 text-yellow-400 font-medium">Shipped</td>
+                                <td class="p-4"><a href="#" class="text-blue-400 hover:underline font-medium">View Details</a></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-gray-300">#125</td>
+                                <td class="p-4 text-gray-300">2025-05-15</td>
+                                <td class="p-4 text-gray-300">Fridge, Blender</td>
+                                <td class="p-4 text-gray-300">$559.98</td>
+                                <td class="p-4 text-red-400 font-medium">Pending</td>
+                                <td class="p-4"><a href="#" class="text-blue-400 hover:underline font-medium">View Details</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Account Settings -->
+            <div class="glass-card p-8">
+                <h3 class="text-3xl font-bold text-yellow-300 mb-6 border-b-2 border-yellow-300 pb-2">Account Settings</h3>
+                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+                    <a href="#" class="bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition duration-300 text-center w-full md:w-auto">Change Password</a>
+                    <a href="#" class="bg-red-500 text-white px-6 py-3 rounded-lg hover:bg-red-600 transition duration-300 text-center w-full md:w-auto">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="p-6 bg-gray-900 bg-opacity-80 text-center">
+        <p class="text-gray-300">© 2025 Takoy Do‘kon. All rights reserved.</p>
+    </footer>
+    <script>
+        document.querySelectorAll('.bg-blue-600').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Redirecting to edit profile...');
+            });
+        });
+        document.querySelectorAll('.text-blue-400').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Viewing order details...');
+            });
+        });
+        document.querySelector('.bg-yellow-500').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Redirecting to change password...');
+        });
+        document.querySelector('.bg-red-500').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Logging out...');
+            window.location.href = 'login.html';
+        });
+        document.querySelector('.bg-green-600').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Redirecting to add funds...');
+        });
+    </script>
+</body>
+</html>
