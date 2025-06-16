@@ -1,0 +1,2 @@
+print("salom eshmatjon")
+
