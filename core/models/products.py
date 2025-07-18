@@ -10,6 +10,14 @@ class Category(models.Model):
     slug = models.SlugField(max_length=128)
     deleted = models.BooleanField(default=False)
 
+    def get_response(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "slug": self.slug,
+            "is_deleted": self.deleted
+        }
+
     # soft delete
     def delete(self, using=None, keep_parents=False):
         self.deleted = True
@@ -86,7 +94,7 @@ class Product(models.Model):
     ctg = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="ctg_products")
 
     def get_price(self):
-        return int(self.price * (1-self.discount/100))
+        return int(self.price * (1 - self.discount / 100))
 
     def get_price_with_icon(self):
         price = {
@@ -110,9 +118,6 @@ class Product(models.Model):
                 i.save()
 
         return result
-
-
-
 
 
 class Rate(models.Model):
@@ -140,15 +145,5 @@ class Cart(models.Model):
         return super(Cart, self).save(*args, **kwargs)
 
     # def get_total_price(self):
-
-
-
-
-
-
-
-
-
-
 
 

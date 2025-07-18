@@ -1,7 +1,11 @@
+"""  nimadga?"""
+import datetime
 import json
 from django.contrib.auth.models import UserManager, AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+
 
 
 class CustomUserManager(UserManager):
@@ -43,6 +47,24 @@ class User(AbstractUser):
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['user_type']
 
+    def get_response(self, access_token=False):
+        result = {
+            "id": self.id,
+            "fio": self.fio,
+            "phone": self.phone,
+            "user_type": self.get_type(),
+        }
+        if access_token:
+            result['token'] = access_token
+
+        return result
+
+    def get_type(self):
+        return {
+            1: "Foydalanuvchi",
+            2: "Admin"
+        }[self.user_type]
+
     def calculate_cart(self):
         carts = self.user_cart.filter(status=True)
         total_balance = 0
@@ -56,9 +78,6 @@ class User(AbstractUser):
             price_type = i.product.price_type
             total_balance += cart_total * valyuta[price_type]
         return f"{total_balance // 12800}"
-
-
-
 
 
 class OTP(models.Model):
@@ -89,9 +108,9 @@ class OTP(models.Model):
         return super().save(*args, **kwargs)
 
     def check_expire_date(self):
-        import datetime
+        """  bu funksiya menga nimadir qiberadi  """
         now = datetime.datetime.now()
-        if (now - self.created).total_seconds() >= 60:
+        if (now - self.created).total_seconds() >= 120:
             self.is_expired = True
             self.save()
             return False

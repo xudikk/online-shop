@@ -72,4 +72,4 @@ def change_cart(request, cart_id, inc):
     else:
         return JsonResponse({
             "error": "Cart Topilmadi"
-        })
+        }, status=404)

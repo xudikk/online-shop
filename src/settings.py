@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*^6g8#^=4aaa!3w1426*=3%4r(blogdbi5#y$j3^uv-yfggp&=
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+APP_NAME = "Online Shop"
 
 # Application definition
 
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework.authtoken",
+    "drf_yasg",
+
     "core"
 ]
 
@@ -76,12 +79,26 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+#
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'shop1_db',
+        "USER": "shop_1",
+        "PASSWORD": "123456",
+        "HOST": "localhost",
+        "PORT": 5432
     }
 }
+
+
 
 
 # Password validation
