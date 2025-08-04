@@ -1,0 +1,457 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %} Product {% endblock %}
+
+{% block content %}
+         {% if status == 'detail' %}
+
+
+            <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                     <div class="header-title">
+                        <h4 class="card-title">Product Detail</h4>
+                     </div>
+
+                  </div>
+                  <div class="card-body">
+                     <div class="table-editable">
+
+                        <table class="table table-bordered table-responsive-md table-striped text-center"
+
+                               style="font-size: 16px;">
+                           <thead>
+                              <tr>
+                                 <th>Key</th>
+                                 <th>Value</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+
+                              <tr>
+                                 <td>Id</td>
+                                 <td>{{ obj.id }}</td>
+                              </tr>
+                              <tr>
+                                 <td>Name</td>
+                                 <td><b style="">{{ obj.name }}</b></td>
+                              </tr>
+                              <tr>
+                                 <td>Brand</td>
+                                 <td><a href=""><b style="">{{ obj.brand.name }}</b></a></td>
+                              </tr>
+                              <tr>
+                                 <td>Category</td>
+                                 <td><a href=""><b style="">{{ obj.ctg.name }}</b></a></td>
+                              </tr>
+                              <tr>
+                                 <td>Info</td>
+                                 <td>{{ obj.info }}</td>
+                              </tr>
+
+                              <tr>
+                                 <td>Image</td>
+                                 <td><img src="{{ obj.img.url }}" width="150px"></td>
+                              </tr>
+
+                           </tbody>
+                        </table>
+
+
+                        <hr>
+                        <div class="header-title">
+                           <h4 class="card-title">Extra info</h4>
+                        </div>
+
+
+                        <table class="table table-bordered table-responsive-md table-striped text-center"
+
+                               style="font-size: 16px;">
+                           <thead>
+                              <tr>
+                                 <th>Key</th>
+                                 <th>Value</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+
+                              <tr>
+                                 <td>Price</td>
+                                 {% if obj.discount %}
+                                 <td style="color: green;">
+                                    <del style="color: red;">{{ obj.price }}</del>
+                                    <span class="badge border border-success text-success">{{ obj.discount }}%</span>
+                                    {{ obj.get_price_with_icon }}
+
+                                 </td>
+                                 {% else %}
+                                 <td>{{ obj.get_price_with_icon }}</td>
+                                 {% endif %}
+                              </tr>
+                              <tr>
+                                 <td>Stock Left</td>
+                                 <td><b style="">{{ obj.stock }}/500</b></td>
+                              </tr>
+                              <tr>
+                                 <td>Created</td>
+                                 <td>{{ obj.get_date_cr }}</td>
+                              </tr>
+
+                              <tr>
+                                 <td>Last Update</td>
+                                 <td>{{ obj.get_date_up }}</td>
+                              </tr>
+
+
+                           </tbody>
+                        </table>
+
+
+                     </div>
+                     <hr>
+                     <a href="{% url 'prod-list' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to list
+                     </a>
+                     <a href="{% url 'dashboard-home' %}" class="btn btn-info">
+                        <i class="fas fa-home"></i>
+                        Back to Home
+                     </a>
+                     <a href="{% url 'prod-edit' pk=obj.id %}" class="btn btn-success">
+                        <i class="fas fa-pen"></i>
+                        Edit {{ obj.name }}
+                     </a>
+                     <a href="" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                        Delete {{ obj.name }}
+                     </a>
+
+                  </div>
+               </div>
+
+
+
+         {% elif status == 'form' %}
+
+
+
+
+
+
+
+             <div class="card">
+                <div class="card-header d-flex justify-content-between">
+                     <div class="header-title">
+                        <h4 class="card-title">Product Form</h4>
+                     </div>
+
+                  </div>
+
+                <div class="card-body">
+                     <form method="post" class="table-editable" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+
+                        <table class="table table-bordered table-responsive-md table-striped text-center"
+                               style="font-size: 16px;">
+                           <thead>
+                              <tr>
+                                 <th>Key</th>
+                                 <th>Input</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+
+                              <tr>
+                                 <td>Name</td>
+                                 <td> <input type="text" class="form-control"
+                                             placeholder="Iphone 16 Pro Max"
+                                             name="name"
+                                             value="{{ obj.name }}"
+                                             required>
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>Image</td>
+                                 <td>
+                                 <div class="custom-file">
+                                       <input type="file" value="{{ obj.img }}" class="custom-file-input" name="img"  accept="image/*" required>
+                                       <label class="custom-file-label" >
+                                          {% if obj %}
+                                             {{ obj.img }}
+                                          {% else %}
+                                             Choose file...
+                                          {% endif %}
+                                       </label>
+                                       <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                 </div>
+
+                                 </td>
+                              </tr>
+                              <tr>
+                                 <td>Info</td>
+                                 <td> <input type="text" class="form-control"
+                                       placeholder="Iphone 16 Pro Max"
+                                       value="{{ obj.info }}"
+                                       name="info">
+                                 </td>
+                              </tr>
+                           </tbody>
+                        </table>
+                        <br>
+                        <hr>
+                        <br>
+                        <div class="form-row">
+                              <div class="col-md-6 mb-3">
+                                 <label>Category</label>
+                                 <select class="form-control" name="ctg" required>
+                                    <option selected disabled>---------</option>
+                                    {% for i in categories %}
+                                    <option value="{{ i.id }}"
+                                    {% if obj.ctg == i %} selected {% endif %}>{{ i.name }}</option>
+                                    {% endfor %}
+
+                                 </select>
+                                 <div class="invalid-feedback">
+                                    Please select a valid category.
+                                 </div>
+                              </div>
+                           <div class="col-md-6 mb-3">
+                                 <label>Brand</label>
+                                 <select class="form-control" name="brand" required>
+                                    <option selected disabled>---------</option>
+                                    {% for i in brands %}
+                                    <option value="{{ i.id }}"
+                                    {% if obj.brand == i %} selected {% endif %}
+                                    >{{ i.name }}</option>
+                                    {% endfor %}
+
+                                 </select>
+                                 <div class="invalid-feedback">
+                                    Please select a valid category.
+                                 </div>
+                              </div>
+
+
+
+                              <div class="col-md-3 mb-3">
+                                 <label>Price</label>
+                                 <input type="text" class="form-control" name="price"
+                                        value="{{ obj.price }}"
+                                        required>
+                                 <div class="valid-feedback">
+                                    Looks good!
+                                 </div>
+                              </div>
+
+                              <div class="col-md-3 mb-3">
+                                 <label>Price Type</label>
+                                 <select class="form-control" name="price_type" required>
+                                    <option selected disabled>---------</option>
+
+                                    <option value="UZS" {% if obj.price_type == 'UZS' %} selected {% endif %} >O'zbek so'mi</option>
+                                    <option value="USD" {% if obj.price_type == 'USD' %} selected {% endif %} >Aqsh Dollori</option>
+                                    <option value="RUB" {% if obj.price_type == 'RUB' %} selected {% endif %} >Rossiya Rubli</option>
+
+                                 </select>
+                                 <div class="valid-feedback">
+                                    Looks good!
+                                 </div>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                 <label >Discount(%)</label>
+                                 <input type="text" class="form-control" name="discount"  value="{{ obj.discount }}" placeholder="20" required>
+                                 <div class="valid-feedback">
+                                    Looks good!
+                                 </div>
+                              </div>
+
+                              <div class="col-md-3 mb-3">
+                                 <label>Stock</label>
+                                 <input type="text" class="form-control" placeholder="100" value="{{ obj.stock }}" name="stock" required>
+                                 <div class="valid-feedback">
+                                    Looks good!
+                                 </div>
+                              </div>
+
+
+
+                        </div>
+                        <hr>
+
+                           <button class="btn btn-success justify-end" type="submit">O'zgarishlarni saqlash</button>
+
+
+
+
+                     </form>
+                     <hr>
+                     <a href="{% url 'prod-list' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to list
+                     </a>
+                     <a href="{% url 'dashboard-home' %}" class="btn btn-info">
+                        <i class="fas fa-home"></i>
+                        Back to Home
+                     </a>
+                     <a href="" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                        Delete {{ obj.name }}
+                     </a>
+
+                  </div>
+
+
+
+
+
+
+
+
+
+             </div>
+
+
+
+
+
+         {% else %}
+
+            <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                     <div class="header-title">
+                        <h4 class="card-title">Product List</h4>
+                     </div>
+
+                  </div>
+                  <div class="card-body">
+                     <div class="table-editable">
+                        <span class="float-right mb-3 mr-2">
+                        <a href="{% url 'prod-add' %}" class="btn btn-sm bg-primary"><i
+                           class="ri-add-fill">Add New</i>
+                        </a>
+                        </span>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                           <thead>
+                              <tr>
+                                 <th>№</th>
+                                 <th>Name</th>
+                                 <th>Stock</th>
+                                 <th>Price</th>
+                                 <th>Image</th>
+                                 <th>Created</th>
+                                 <th>Updated</th>
+                                 <th>Actions</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+
+                              {% for i in result %}
+                              <tr>
+                                 <td>{{ forloop.counter }}</td>
+                                 <td>{{ i.name }}</td>
+                                 <td>{{ i.stock }}</td>
+
+                                 {% if i.discount %}
+                                 <td style="color: green;">
+                                    <del style="color: red;">{{ i.price }}</del>
+                                    <span class="badge border border-success text-success">{{ i.discount }}%</span><br>
+                                    {{ i.get_price_with_icon }}
+
+                                 </td>
+                                 {% else %}
+                                 <td>{{ i.get_price_with_icon }}</td>
+                                 {% endif %}
+
+
+                                 <td>
+                                    <img src="{{ i.img.url }}" width="50px" alt="">
+
+                                 </td>
+                                 <td>{{ i.get_date_cr }}</td>
+                                 <td>{{ i.get_date_up }}</td>
+
+                                 <td>
+                                       <a href="{% url 'prod-info' pk=i.id %}" class="btn btn-sm btn-outline-info">
+                                         <i class="fa-solid fa-newspaper"></i>
+                                       </a>
+
+                                       <a href="{% url 'prod-edit' pk=i.id %}" class="btn btn-sm btn-outline-success">
+                                         <i class="fa-solid fa-pen-to-square"></i>
+                                       </a>
+
+                                       <a href="" class="btn btn-sm btn-outline-danger">
+                                         <i class="fas fa-trash"></i>
+                                       </a>
+
+                                 </td>
+                              </tr>
+                              {% endfor %}
+
+                           </tbody>
+                        </table>
+
+
+                        {% if paginator.num_pages %}
+
+                        <ul class="pagination justify-content-end">
+
+                           {% if result.has_previous %}
+                           <li class="page-item">
+                              <a class="page-link" href="?page={{ result.previous_page_number }}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              </a>
+                           </li>
+                           {% endif %}
+
+                           {% for i in paginator.page_range %}
+                              {% if i == page_number %}
+                              <li class="page-item active">
+                                 <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                              </li>
+                              {% else %}
+                              <li class="page-item ">
+                                    <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                              </li>
+                              {% endif %}
+                           {% endfor %}
+
+                           {% if result.has_next %}
+                           <li class="page-item">
+                              <a class="page-link" href="?page={{ result.next_page_number }}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              </a>
+                           </li>
+                           {% endif %}
+
+
+                        </ul>
+                        {% endif %}
+
+
+
+                     </div>
+                  </div>
+               </div>
+         {% endif %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

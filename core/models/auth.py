@@ -86,7 +86,7 @@ class OTP(models.Model):
 
     is_expired = models.BooleanField(default=False)
     tries = models.SmallIntegerField(default=0)
-    extra = models.JSONField(default=json.dumps({}))
+    extra = models.JSONField(default=dict)
     is_verified = models.BooleanField(default=False)
 
     step = models.CharField(

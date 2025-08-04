@@ -73,7 +73,6 @@ def step_two(request):
             ctx['error'] = 'Kod Xato'
             return render(request, 'auth/step_two.html', ctx)
 
-        print("shu yerga keldi")
         if otp_base.step == 'regis':
             extra = otp_base.extra
             pas = extra.pop("password")
@@ -89,8 +88,7 @@ def step_two(request):
 
         if otp_base.step == 'login':
             user = User.objects.filter(phone=otp_base.mobile).first()
-            print(user)
-            print("bu yerga ham keldi")
+
             if user:
                 login(request, user)
                 return redirect('home')
@@ -134,10 +132,10 @@ def sign_in(request):
     return render(request, 'auth/login.html', ctx)
 
 
-@login_required(login_url='sign_in')
+@login_required(login_url='login')
 def sign_out(request):
     logout(request)
-    return redirect('sign_in')
+    return redirect('login')
 
 
 
