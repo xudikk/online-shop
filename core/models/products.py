@@ -10,6 +10,14 @@ class Category(models.Model):
     slug = models.SlugField(max_length=128)
     deleted = models.BooleanField(default=False)
 
+    def get_response(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "slug": self.slug,
+            "is_deleted": self.deleted
+        }
+
     # soft delete
     def delete(self, using=None, keep_parents=False):
         self.deleted = True
@@ -67,7 +75,7 @@ class Brand(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=128)
     img = models.ImageField(upload_to="products/", max_length=512)
-    info = models.TextField(null=True)
+    info = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     stock = models.PositiveIntegerField(default=0)
@@ -85,8 +93,40 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, related_name="brand_products")
     ctg = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="ctg_products")
 
+    def get_date_cr(self):
+        import datetime
+        now = datetime.datetime.now()
+        calc = int((now - self.created).total_seconds() // 60)
+        if calc <= 0:
+            return "Hozirgina"
+
+        if 60 > calc > 0:
+            return f"{calc} minut oldin"
+
+        if 60 <= calc < 60 * 24:
+            return f"{int(calc // 60)} soat oldin"
+
+        if 60 * 24 <= calc:
+            return self.created.strftime("%H:%M / %d-%B %Y-yil  ")
+
+    def get_date_up(self):
+        import datetime
+        now = datetime.datetime.now()
+        calc = int((now - self.updated).total_seconds() // 60)
+        if calc == 0:
+            return "Hozirgina"
+
+        if 60 > calc > 0:
+            return f"{calc} minut oldin"
+
+        if 60 <= calc < 60 * 24:
+            return f"{int(calc // 60)} soat oldin"
+
+        if 60 * 24 <= calc:
+            return self.updated.strftime("%H:%M / %d-%B %Y-yil  ")
+
     def get_price(self):
-        return int(self.price * (1-self.discount/100))
+        return int(self.price * (1 - self.discount / 100))
 
     def get_price_with_icon(self):
         price = {
@@ -110,9 +150,6 @@ class Product(models.Model):
                 i.save()
 
         return result
-
-
-
 
 
 class Rate(models.Model):
@@ -140,15 +177,3 @@ class Cart(models.Model):
         return super(Cart, self).save(*args, **kwargs)
 
     # def get_total_price(self):
-
-
-
-
-
-
-
-
-
-
-
-

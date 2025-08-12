@@ -5,11 +5,15 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 from core.models import Category, Product, Cart
+import logging
+
+logging = logging.getLogger('core')
 
 
 def index(request):
     # ctgs = Category.objects.get(id=1)
     most_sale = Product.objects.all()
+
     try:
         error = request.session.pop("error")
     except:
@@ -72,4 +76,4 @@ def change_cart(request, cart_id, inc):
     else:
         return JsonResponse({
             "error": "Cart Topilmadi"
-        })
+        }, status=404)
